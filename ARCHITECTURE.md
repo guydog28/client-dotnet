@@ -70,7 +70,7 @@ policy implementation.
 
 Do not implement scheme, guide, access-policy, document-assessment, or engine
 evaluation semantics in this repository. Do not recompute Context resolution,
-compose Context results locally, or fuse the three document access scenarios.
+compose Context results locally.
 The client sends canonical inputs and decodes canonical outputs.
 
 Do not add handwritten or shadow DTOs for generated wire types, duplicate a

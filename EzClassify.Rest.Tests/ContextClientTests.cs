@@ -2150,37 +2150,6 @@ public class ContextClientTests
         }
     }
 
-    [Fact]
-    public async Task DocumentAssessAccess_RoutesProfileContextAndParsesScenarios()
-    {
-        const string audit = """{"whole":null,"wholes":[],"wholeValidation":null,"parts":[],"wholeCoversParts":null,"unmarkedSpans":[],"proceduralFlags":[],"overallVerdict":"pass","vocabulary":null,"documentDigest":"sha256:d","guideAssessment":null,"markingRequirements":{"whole":false,"part":false},"limitations":[]}""";
-        var response = """
-          {"resolution":{"contextId":"acme-marking","resolvedVersion":"1.0.0","artifacts":[],"sources":[]},"operationLimitations":[],
-           "responseProjection":{"profile":"summary","detailsComplete":false,"omittedFields":["/result/authored/decision"],"counts":{"nominations":0,"evidenceSpans":0,"guideUnits":0,"accessRuleResults":0,"contentRequirements":0,"contextRequirements":0}},
-           "result":{"audit":AUDIT,"authored":{"basis":"authored","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},
-             "authoritative":{"basis":"authoritative","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},"projected":null}}
-          """.Replace("AUDIT", audit);
-        var routes = new Dictionary<string, (HttpStatusCode, string)>
-        {
-            ["/document/assess-access"] = (HttpStatusCode.OK, response),
-        };
-        var (client, handler) = await CtxClientFactory.ConnectAsync(routes);
-        using (client)
-        {
-            var result = await client.Document!.AssessAccessAsync(
-                "document", """{"clearance":"high"}""", """{"team":"a"}""",
-                responseProfile: DocumentResponseProfile.Summary);
-            Assert.Equal(AccessScenarioStatus.NotEvaluated, result.Result.Authored.Status);
-            Assert.Null(result.Result.Projected);
-            Assert.Equal(DocumentResponseProfile.Summary, result.ResponseProjection!.Profile);
-            var (_, path, body) = handler.Requests[^1];
-            Assert.Equal("/v1/ctx/acme-marking/1.0.0/document/assess-access", path);
-            Assert.Contains("\"userAttributes\":{\"clearance\":\"high\"}", body);
-            Assert.Contains("\"context\":{\"team\":\"a\"}", body);
-            Assert.Contains("\"responseProfile\":\"summary\"", body);
-        }
-    }
-
     // --- errors ------------------------------------------------------------
 
     [Fact]
@@ -2475,13 +2444,4 @@ public class ContextClientJsonArgumentGuardTests
         }
     }
 
-    [Fact]
-    public async Task AssessAccess_RejectsNonObjectContext()
-    {
-        using var client = await ConnectAsync();
-
-        var error = await Assert.ThrowsAsync<ArgumentException>(
-            () => client.Document!.AssessAccessAsync("text", """{"membership":"HIGH"}""", contextJson: "7"));
-        Assert.Equal("contextJson", error.ParamName);
-    }
 }

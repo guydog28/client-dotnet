@@ -113,38 +113,14 @@ public class ContextResultParserTolerantParsingTests
     }
 
     [Fact]
-    public void OptionalProfileFields_OmittedRemainNullRatherThanEmpty()
-    {
-        var json = """
-          {"resolution":{"contextId":"ctx","resolvedVersion":"1.0.0","artifacts":[],"sources":[]},"operationLimitations":[],
-           "responseProjection":{"profile":"standard","detailsComplete":false,"omittedFields":[],"counts":{"nominations":0,"evidenceSpans":0,"guideUnits":0,"accessRuleResults":0,"contentRequirements":0,"contextRequirements":0}},
-           "result":{"audit":{"whole":null,"wholes":[],"wholeValidation":null,"parts":[],"wholeCoversParts":null,"unmarkedSpans":[],"proceduralFlags":[],"overallVerdict":"pass","vocabulary":null,"documentDigest":"sha256:d","guideAssessment":null,"markingRequirements":{"whole":false,"part":false},"limitations":[]},
-             "authored":{"basis":"authored","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},
-             "authoritative":{"basis":"authoritative","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},"projected":null}}
-          """;
-        var result = ContextResultParser.ParseContextDocumentAccessAssessmentResult(json);
-        Assert.Equal(DocumentResponseProfile.Standard, result.ResponseProjection.Profile);
-        Assert.Null(result.Result.Authored.Decision);
-        Assert.Null(result.Result.Authored.ContentRequirements);
-        Assert.Null(result.Result.Authored.ContextRequirements);
-    }
-
-    [Fact]
     public void DocumentEnvelope_MissingResponseProjectionThrows()
     {
         var audit = """
           {"resolution":{"contextId":"ctx","resolvedVersion":"1.0.0","artifacts":[],"sources":[]},"operationLimitations":[],
            "result":{"whole":null,"wholes":[],"wholeValidation":null,"parts":[],"wholeCoversParts":null,"unmarkedSpans":[],"proceduralFlags":[],"overallVerdict":"pass","vocabulary":null,"documentDigest":"sha256:d","guideAssessment":null,"markingRequirements":{"whole":false,"part":false},"limitations":[]}}
           """;
-        var access = """
-          {"resolution":{"contextId":"ctx","resolvedVersion":"1.0.0","artifacts":[],"sources":[]},"operationLimitations":[],
-           "result":{"audit":{"whole":null,"wholes":[],"wholeValidation":null,"parts":[],"wholeCoversParts":null,"unmarkedSpans":[],"proceduralFlags":[],"overallVerdict":"pass","vocabulary":null,"documentDigest":"sha256:d","guideAssessment":null,"markingRequirements":{"whole":false,"part":false},"limitations":[]},
-             "authored":{"basis":"authored","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},
-             "authoritative":{"basis":"authoritative","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},"projected":null}}
-          """;
 
         Assert.ThrowsAny<JsonException>(() => ContextResultParser.ParseContextDocumentAuditResult(audit));
-        Assert.ThrowsAny<JsonException>(() => ContextResultParser.ParseContextDocumentAccessAssessmentResult(access));
     }
 
     [Fact]
@@ -230,21 +206,6 @@ public class ContextResultParserTolerantParsingTests
         Assert.ThrowsAny<JsonException>(() => ResultParser.ParseAccessDecision("""{"granted":true,"rules":[{"name":"r"}]}"""));
     }
 
-    [Fact]
-    public void UnknownScenarioStatus_KeepsTheToken()
-    {
-        var json = """
-          {"resolution":{"contextId":"ctx","resolvedVersion":"1.0.0","artifacts":[],"sources":[]},"operationLimitations":[],
-           "responseProjection":{"profile":"standard","detailsComplete":true,"omittedFields":[],"counts":{"nominations":0,"evidenceSpans":0,"guideUnits":0,"accessRuleResults":0,"contentRequirements":0,"contextRequirements":0}},
-           "result":{"audit":{"whole":null,"wholes":[],"wholeValidation":null,"parts":[],"wholeCoversParts":null,"unmarkedSpans":[],"proceduralFlags":[],"overallVerdict":"pass","vocabulary":null,"documentDigest":"sha256:d","guideAssessment":null,"markingRequirements":{"whole":false,"part":false},"limitations":[]},
-             "authored":{"basis":"authored","advisory":false,"status":"maybe","target":null,"limitations":[]},
-             "authoritative":{"basis":"authoritative","advisory":false,"status":"not-evaluated","target":null,"limitations":[]},"projected":null}}
-          """;
-        var result = ContextResultParser.ParseContextDocumentAccessAssessmentResult(json);
-        Assert.Equal(new AccessScenarioStatus("maybe"), result.Result.Authored.Status);
-        Assert.False(result.Result.Authored.Status.IsKnown);
-        Assert.Equal(AccessScenarioStatus.NotEvaluated, result.Result.Authoritative.Status);
-    }
 }
 
 // ---------------------------------------------------------------------------

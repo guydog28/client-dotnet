@@ -70,7 +70,6 @@ public class ContractFidelityTests
     private static readonly Dictionary<(string Record, string Wire), string> Requiredness = new()
     {
         [("ContextDocumentAuditResult", "responseProjection")] = DocumentProjection,
-        [("ContextDocumentAccessAssessmentResult", "responseProjection")] = DocumentProjection,
         [("Term", "singular")] = TolerantWord,
         [("Term", "plural")] = TolerantWord,
     };

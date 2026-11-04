@@ -1048,32 +1048,6 @@ public sealed class ContextDocumentOps
         return ContextResultParser.ParseContextDocumentAuditResult(json);
     }
 
-    /// <summary>
-    /// Audit a document once and assess authored, authoritative, and advisory
-    /// projected access scenarios for the supplied immutable subject attributes.
-    /// </summary>
-    /// <exception cref="ArgumentException"><paramref name="userAttributesJson"/> or <paramref name="contextJson"/> is empty, is not valid JSON, or is not a JSON object.</exception>
-    public async Task<ContextDocumentAccessAssessmentResult> AssessAccessAsync(
-        string text,
-        string userAttributesJson,
-        string? contextJson = null,
-        GuideDeterminationInput? guideDeterminations = null,
-        DocumentResponseProfile? responseProfile = null,
-        CancellationToken cancellationToken = default)
-    {
-        using var userAttributesDoc = CtxPayload.JsonObjectArgument(userAttributesJson, nameof(userAttributesJson));
-        using var contextDoc = CtxPayload.OptionalJsonObjectArgument(contextJson, nameof(contextJson));
-        var body = new Dictionary<string, object?>
-        {
-            ["text"] = text,
-            ["userAttributes"] = userAttributesDoc.RootElement,
-        };
-        CtxPayload.PutIfSet(body, "context", contextDoc);
-        if (guideDeterminations is not null) body["guideDeterminations"] = CtxPayload.GuideDeterminations(guideDeterminations);
-        if (responseProfile is not null) body["responseProfile"] = responseProfile.Value.ToWire();
-        var json = await _client.PostCtxAsync("document/assess-access", body, cancellationToken).ConfigureAwait(false);
-        return ContextResultParser.ParseContextDocumentAccessAssessmentResult(json);
-    }
 }
 
 /// <summary>Helpers for building payload-only context request bodies.</summary>

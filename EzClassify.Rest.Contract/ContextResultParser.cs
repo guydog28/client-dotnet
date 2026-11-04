@@ -399,20 +399,6 @@ public static class ContextResultParser
             ParseDocumentResponseProjectionElement(JsonRead.RequiredProperty(root, "responseProjection")));
     }
 
-    /// <summary>Parse the resolved Context envelope for document access assessment.</summary>
-    public static ContextDocumentAccessAssessmentResult ParseContextDocumentAccessAssessmentResult(string json)
-    {
-        using var doc = JsonDocument.Parse(json);
-        var root = doc.RootElement;
-        JsonRead.RequireObject(root, "document access envelope");
-        ResponseCheck.Require("ContextDocumentAccessAssessmentResult", root);
-        return new ContextDocumentAccessAssessmentResult(
-            ParseContextResolutionElement(JsonRead.RequiredProperty(root, "resolution")),
-            ParseDocumentAccessAssessmentElement(JsonRead.RequiredProperty(root, "result")),
-            JsonRead.RequiredList(root, "operationLimitations", ParseAssessmentLimitationElement),
-            ParseDocumentResponseProjectionElement(JsonRead.RequiredProperty(root, "responseProjection")));
-    }
-
     /// <summary>Parse the resolved Context envelope for scheme processing.</summary>
     public static ContextSchemeProcessResult ParseContextSchemeProcessResult(string json)
     {
@@ -1064,60 +1050,6 @@ public static class ContextResultParser
                 ? JsonRead.ElementList(assertions, ParseAssertionReferenceElement) : null,
             el.TryGetProperty("value", out var value) ? value.Clone() : null);
     }
-
-    private static DocumentAccessAssessment ParseDocumentAccessAssessmentElement(JsonElement el)
-    {
-        JsonRead.RequireObject(el, "document access assessment");
-        return new DocumentAccessAssessment(
-            ReadDocumentAuditReport(JsonRead.RequiredProperty(el, "audit")),
-            ParseAccessScenarioAssessmentElement(JsonRead.RequiredProperty(el, "authored")),
-            ParseAccessScenarioAssessmentElement(JsonRead.RequiredProperty(el, "authoritative")),
-            el.TryGetProperty("projected", out var projected) && projected.ValueKind == JsonValueKind.Object
-                ? ParseAccessScenarioAssessmentElement(projected) : null);
-    }
-
-    private static AccessScenarioAssessment ParseAccessScenarioAssessmentElement(JsonElement el)
-    {
-        JsonRead.RequireObject(el, "access scenario");
-        return new AccessScenarioAssessment(
-            new AccessScenarioBasis(JsonRead.RequiredString(el, "basis")),
-            JsonRead.RequiredBool(el, "advisory"),
-            new AccessScenarioStatus(JsonRead.RequiredString(el, "status")),
-            el.TryGetProperty("target", out var target) && target.ValueKind == JsonValueKind.Object
-                ? ParseEffectiveDocumentTargetElement(target) : null,
-            JsonRead.RequiredList(el, "limitations", ParseAssessmentLimitationElement),
-            el.TryGetProperty("decision", out var decision) && decision.ValueKind == JsonValueKind.Object
-                ? ResultParser.ReadAccessDecision(decision) : null,
-            el.TryGetProperty("contentRequirements", out var content) && content.ValueKind == JsonValueKind.Array
-                ? JsonRead.ElementList(content, ParseContentChangeRequirementElement) : null,
-            el.TryGetProperty("contextRequirements", out var context) && context.ValueKind == JsonValueKind.Array
-                ? JsonRead.ElementList(context, ParseSubjectContextRequirementElement) : null);
-    }
-
-    private static EffectiveDocumentTarget ParseEffectiveDocumentTargetElement(JsonElement el) => new(
-        new AccessScenarioBasis(JsonRead.RequiredString(el, "basis")),
-        JsonRead.RequiredString(el, "marking"),
-        JsonRead.RequiredList(el, "assertions", ResultParser.ReadAssertion),
-        JsonRead.StrictStringList(el, "authoredParts"),
-        JsonRead.OptionalString(el, "authoredWhole"),
-        JsonRead.OptionalString(el, "determinedGuideRequiredWhole"),
-        JsonRead.OptionalString(el, "projectedGuideRequiredWhole"));
-
-    private static ContentChangeRequirement ParseContentChangeRequirementElement(JsonElement el) => new(
-        ReadRuleReference(JsonRead.RequiredProperty(el, "rule")),
-        ParseAssertionReferenceElement(JsonRead.RequiredProperty(el, "assertion")),
-        JsonRead.StrictStringList(el, "supportIds"),
-        JsonRead.RequiredString(el, "instruction"),
-        JsonRead.RequiredBool(el, "verificationRequired"));
-
-    private static SubjectContextRequirement ParseSubjectContextRequirementElement(JsonElement el) => new(
-        ReadRuleReference(JsonRead.RequiredProperty(el, "rule")),
-        JsonRead.RequiredString(el, "subjectPath"),
-        JsonRead.RequiredString(el, "contextPath"),
-        JsonRead.RequiredString(el, "operator"),
-        JsonRead.RequiredString(el, "instruction"),
-        el.TryGetProperty("acceptableValues", out var values) && values.ValueKind == JsonValueKind.Array
-            ? CloneElementList(values) : null);
 
     private static DocumentGuideAssessment ParseDocumentGuideAssessmentElement(JsonElement el) => new(
         new GuideCompilationStatus(JsonRead.RequiredString(el, "status")),

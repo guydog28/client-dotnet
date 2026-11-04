@@ -62,8 +62,6 @@ internal static class CachePlanCalls
 
         // -- never cached --------------------------------------------------------
         ["context.audit|ctx-document-audit.ok"] = async (c, ct, _, _) => Of(await c.Document!.AuditAsync(Releasable, null, DocumentResponseProfile.Summary, ct)),
-        ["context.assessDocumentAccess|ctx-document-assess-access.ok"] = async (c, ct, _, context) =>
-            Of(await c.Document!.AssessAccessAsync(Releasable, Clearance, contextJson: context, responseProfile: DocumentResponseProfile.Standard, cancellationToken: ct)),
         ["context.accessRequirements|ctx-access-describe-requirements.ok"] = async (c, ct, _, _) => Of(await c.Access!.DescribeRequirementsAsync("OPEN", ct)),
         ["context.translate|ctx-crosswalk-translate.translated"] = async (c, ct, _, _) => Of(await c.Crosswalk!.TranslateAsync("ez-test-to-ez-gated", "OPEN", ct)),
         ["context.translate|ctx-crosswalk-translate.forbidden"] = async (c, ct, _, _) => Of(await c.Crosswalk!.TranslateAsync("ez-test-to-ez-gated", "SENSITIVE", ct)),

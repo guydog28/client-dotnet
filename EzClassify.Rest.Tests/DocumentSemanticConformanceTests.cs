@@ -152,7 +152,6 @@ public class DocumentSemanticConformanceTests
         var operationPath = operation switch
         {
             "auditDocument" => context.Path + "/document/audit",
-            "assessDocumentAccess" => context.Path + "/document/assess-access",
             "documentAccessRequirements" => context.Path + "/access/describe-requirements",
             // The .NET SDK has no CLI, but this case records a document-audit
             // envelope. Replaying it through AuditAsync still proves the shared
@@ -172,9 +171,6 @@ public class DocumentSemanticConformanceTests
             {
                 "auditDocument" => await client.Document!.AuditAsync(
                     RecipeText(recipe), DecodeGuideDeterminations(recipe), RecipeProfile(recipe)),
-                "assessDocumentAccess" => await client.Document!.AssessAccessAsync(
-                    RecipeText(recipe), Json(recipe, "userAttributes", "{}"), Json(recipe, "context", "{}"),
-                    DecodeGuideDeterminations(recipe), RecipeProfile(recipe)),
                 "documentAccessRequirements" => await ReplayRequirementsAsync(client.Access!, recipe),
                 "cliDocument" => await client.Document!.AuditAsync(
                     RecipeText(recipe), DecodeGuideDeterminations(recipe), RecipeProfile(recipe)),
@@ -246,7 +242,6 @@ public class DocumentSemanticConformanceTests
         var operationKeys = operation switch
         {
             "auditDocument" or "cliDocument" => new[] { "text", "guideDeterminations", "responseProfile" },
-            "assessDocumentAccess" => new[] { "text", "userAttributes", "context", "guideDeterminations", "responseProfile" },
             "documentAccessRequirements" => new[] { "marking", "assertions" },
             _ => Array.Empty<string>(),
         };

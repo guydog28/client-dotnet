@@ -122,9 +122,6 @@ public class RequestSchemaConformanceTests
             ["crosswalk.translate-assertions"] = ("crosswalk/translate", c => c.Crosswalk!.TranslateAsync("cw-1", new[] { Level })),
             ["document.audit"] = ("document/audit", c => c.Document!.AuditAsync(
                 "document text", Determinations, DocumentResponseProfile.Full)),
-            ["document.assess-access"] = ("document/assess-access", c => c.Document!.AssessAccessAsync(
-                "document text", """{ "clearance": "high" }""", """{ "project": "p1" }""",
-                Determinations, DocumentResponseProfile.Full)),
         };
 
     public static IEnumerable<object[]> CaseNames() => Cases.Keys.Select(name => new object[] { name });

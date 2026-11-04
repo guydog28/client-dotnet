@@ -165,8 +165,6 @@ public class WireCorpusReplayTests
             Check<ContextDocumentAuditResult>((audit, body) => SameCount(audit.Result.Parts, body["result"]!["parts"]!))),
         ["ctx-document-audit.empty-text"] = Ctx("ez-full", "ctx-document-audit.empty-text",
             async c => await c.Document!.AuditAsync("")),
-        ["ctx-document-assess-access.ok"] = Ctx("ez-full", "ctx-document-assess-access.ok",
-            async c => await c.Document!.AssessAccessAsync(Releasable, Clearance, contextJson: RecordedContext("ctx-document-assess-access.ok"), responseProfile: DocumentResponseProfile.Standard)),
 
         // -- scheme resources -------------------------------------------------
         ["ctx-scheme-summary.ok"] = Ctx("ez-presets", "ctx-scheme-summary.ok",

@@ -37,8 +37,8 @@ if (!fs.existsSync(openapiFile)) {
 const openapiText = fs.readFileSync(openapiFile, 'utf8');
 const OPENAPI_COMPONENTS = [
   'ArtifactReference', 'ContextResolution', 'DocumentResponseProjection',
-  'DocumentAuditReport', 'DocumentAccessAssessment',
-  'ContextDocumentAuditResult', 'ContextDocumentAccessAssessmentResult',
+  'DocumentAuditReport',
+  'ContextDocumentAuditResult',
   'ContextSchemeProcessResult', 'ContextGuideEvaluationResult',
   'ContextAccessDecisionResult', 'AccessRequirementsDescription',
 ];

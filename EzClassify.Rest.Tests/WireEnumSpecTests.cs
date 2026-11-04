@@ -23,8 +23,6 @@ public class WireEnumSpecTests
     private static readonly IReadOnlyDictionary<Type, string> SpecSchema = new Dictionary<Type, string>
     {
         [typeof(AccessOperandSource)] = "AccessOperandSource",
-        [typeof(AccessScenarioBasis)] = "AccessScenarioBasis",
-        [typeof(AccessScenarioStatus)] = "AccessScenarioStatus",
         [typeof(ArtifactKind)] = "ArtifactKind",
         [typeof(AuditVerdict)] = "DocumentOverallVerdict",
         [typeof(Confidence)] = "AssertionConfidence",

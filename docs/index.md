@@ -1,6 +1,6 @@
 # EzClassify .NET SDK reference
 
-This reference covers the public types and members in `EzClassify.Rest.Contract`
+This reference covers the public types and members in `EzClassify.Contract`
 and `EzClassify.Rest.Client`, including generated wire models. It is extracted
 from the common `netstandard2.0` API and XML comments. The client also targets
 `net8.0`; both frameworks share this public API.

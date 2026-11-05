@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using YamlDotNet.RepresentationModel;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

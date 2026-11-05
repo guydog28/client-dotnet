@@ -3,9 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <ImplicitUsings>disable</ImplicitUsings>
-    <AssemblyName>EzClassify.Rest.Contract</AssemblyName>
-    <RootNamespace>EzClassify</RootNamespace>
-    <PackageId>EzClassify.Rest.Contract</PackageId>
+    <AssemblyName>EzClassify.Contract</AssemblyName>
+    <RootNamespace>EzClassify.Contract</RootNamespace>
+    <PackageId>EzClassify.Contract</PackageId>
     <Version>1.0.0-dev.30</Version>
     <Description>EzClassify .NET SDK: generated model records and result parsers.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

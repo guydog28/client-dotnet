@@ -9,6 +9,7 @@ using System.Threading;
 using System.Reflection;
 using System.Net.Http.Headers;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

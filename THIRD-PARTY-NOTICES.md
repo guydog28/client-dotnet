@@ -14,8 +14,8 @@ because they are not part of the distributed runtime.
 
 | Package | Direct runtime dependencies |
 | --- | --- |
-| `EzClassify.Rest.Client` | `EzClassify.Rest.Contract` (first-party) |
-| `EzClassify.Rest.Contract` | `System.Text.Json` |
+| `EzClassify.Contract` | `System.Text.Json` |
+| `EzClassify.Rest.Client` | `EzClassify.Contract` (first-party) |
 
 ## Third-party runtime dependencies
 
@@ -27,63 +27,63 @@ transitively, by the published packages above.
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://dot.net/
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Buffers 4.6.1
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://github.com/dotnet/maintenance-packages
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.IO.Pipelines 10.0.13
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://dot.net/
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Memory 4.6.3
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://github.com/dotnet/maintenance-packages
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Numerics.Vectors 4.6.1
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://github.com/dotnet/maintenance-packages
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Runtime.CompilerServices.Unsafe 6.1.2
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://github.com/dotnet/maintenance-packages
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Text.Encodings.Web 10.0.13
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://dot.net/
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Text.Json 10.0.13
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://dot.net/
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ### System.Threading.Tasks.Extensions 4.6.3
 
 - License: MIT
 - Copyright: © Microsoft Corporation. All rights reserved.
 - Project: https://github.com/dotnet/maintenance-packages
-- Used by: `EzClassify.Rest.Client`, `EzClassify.Rest.Contract`
+- Used by: `EzClassify.Contract`, `EzClassify.Rest.Client`
 
 ## Build-time targeting pack packages
 

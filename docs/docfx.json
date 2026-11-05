@@ -3,7 +3,7 @@
     "src": [{
       "src": "..",
       "files": [
-        "EzClassify.Rest.Contract/EzClassify.Rest.Contract.csproj",
+        "EzClassify.Contract/EzClassify.Contract.csproj",
         "EzClassify.Rest.Client/EzClassify.Rest.Client.csproj"
       ]
     }],

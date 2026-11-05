@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 using YamlDotNet.RepresentationModel;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -371,7 +372,7 @@ public class ContractFidelityTests
         && type is YamlScalarNode { Value: "null" };
 
     private static bool IsWireEnum(Type type) =>
-        type.IsValueType && type.Namespace == "EzClassify" && type.GetMethod("ToWire", Type.EmptyTypes) is not null;
+        type.IsValueType && type.Namespace == typeof(Assertion).Namespace && type.GetMethod("ToWire", Type.EmptyTypes) is not null;
 
     private static Type? ItemType(Type type) =>
         type == typeof(string) ? null
@@ -560,7 +561,7 @@ public class ContractFidelityTests
 
     private static IEnumerable<Type> ContractRecords() =>
         typeof(CoverageReport).Assembly.GetExportedTypes()
-            .Where(type => type.Namespace == "EzClassify" && type.GetMethod("<Clone>$") is not null)
+            .Where(type => type.Namespace == typeof(Assertion).Namespace && type.GetMethod("<Clone>$") is not null)
             .OrderBy(type => type.Name, StringComparer.Ordinal);
 
     private static YamlMappingNode LoadSchemas()
@@ -688,9 +689,9 @@ public class ContractFidelityTests
         var directory = new DirectoryInfo(AppContext.BaseDirectory);
         while (directory is not null)
         {
-            if (File.Exists(Path.Combine(directory.FullName, "EzClassify.Rest.sln"))) return directory.FullName;
+            if (File.Exists(Path.Combine(directory.FullName, "EzClassify.sln"))) return directory.FullName;
             directory = directory.Parent;
         }
-        throw new DirectoryNotFoundException("Cannot locate EzClassify.Rest.sln");
+        throw new DirectoryNotFoundException("Cannot locate EzClassify.sln");
     }
 }

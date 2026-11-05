@@ -30,6 +30,7 @@
  */
 
 using EzClassify;
+using EzClassify.Contract;
 
 var apiUrl = Environment.GetEnvironmentVariable("EZC_API_URL") ?? "http://127.0.0.1:4010";
 var contextId = Environment.GetEnvironmentVariable("EZC_CONTEXT_ID") ?? "cedar-valley";

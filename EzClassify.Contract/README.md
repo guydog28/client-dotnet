@@ -1,4 +1,4 @@
-# EzClassify.Rest.Contract
+# EzClassify.Contract
 
 Generated C# wire models and response parsers for the EzClassify REST API.
 
@@ -7,7 +7,7 @@ Types are generated from the EzClassify REST contract: its OpenAPI document and 
 ## Install
 
 ```
-dotnet add package EzClassify.Rest.Contract
+dotnet add package EzClassify.Contract
 ```
 
 ## Contents

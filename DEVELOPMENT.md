@@ -20,7 +20,7 @@ make test   # dotnet test --filter "Category!=Live"
 
 ## Building and Testing
 
-Standard `dotnet` CLI against [`EzClassify.Rest.sln`](EzClassify.Rest.sln); the `Makefile` wraps the
+Standard `dotnet` CLI against [`EzClassify.sln`](EzClassify.sln); the `Makefile` wraps the
 same commands for parity with the other SDKs.
 
 | Action | Native command | Notes |
@@ -45,7 +45,7 @@ documentation generation requires no live REST deployment.
 ## What to Know Before Changing Things
 
 - **The spec is vendored, not authored here.** The model records in
-  `EzClassify.Rest.Contract` are generated from the OpenAPI spec under
+  `EzClassify.Contract` are generated from the OpenAPI spec under
   [`vendor/spec/`](vendor/spec/). That mirror is owned by [ezclassify/contracts](https://github.com/ezclassify/contracts) and written into
   this repo by the EzClassify spec bot;
   `vendor-readonly.yml` rejects a vendor commit from anyone else.

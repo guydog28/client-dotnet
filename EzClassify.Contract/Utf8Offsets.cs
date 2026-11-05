@@ -1,6 +1,6 @@
 using System;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>Conversion helpers for the UTF-8 byte offsets used by document APIs.</summary>
 /// <remarks>

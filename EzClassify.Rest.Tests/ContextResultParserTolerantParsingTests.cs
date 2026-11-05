@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.Json;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

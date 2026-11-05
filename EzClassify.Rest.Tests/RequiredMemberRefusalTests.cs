@@ -7,6 +7,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Xunit;
 using YamlDotNet.RepresentationModel;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -117,9 +118,9 @@ public class RequiredMemberRefusalTests
         public static SpecResponses Load()
         {
             var directory = new DirectoryInfo(AppContext.BaseDirectory);
-            while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "EzClassify.Rest.sln")))
+            while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "EzClassify.sln")))
                 directory = directory.Parent;
-            var specPath = Path.Combine(directory?.FullName ?? throw new DirectoryNotFoundException("Cannot locate EzClassify.Rest.sln"),
+            var specPath = Path.Combine(directory?.FullName ?? throw new DirectoryNotFoundException("Cannot locate EzClassify.sln"),
                 "vendor", "spec", "openapi.yaml");
             var yaml = new YamlStream();
             using (var reader = new StreamReader(specPath)) yaml.Load(reader);

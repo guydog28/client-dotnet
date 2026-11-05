@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.Json;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -1045,7 +1046,7 @@ public class ResultParserAccessDecisionTests
     public void ParseAccessDecision_RuleMissingRequiredFields_Throws()
     {
         Assert.ThrowsAny<JsonException>(() => ResultParser.ParseAccessDecision(
-            """{"granted":false,"rules":[{"granted":false}]}"""));
+            """{"granted":false,"warnings":[],"rules":[{"granted":false}]}"""));
     }
 
     [Fact]
@@ -1058,7 +1059,7 @@ public class ResultParserAccessDecisionTests
     public void ParseAccessDecision_Provenance_CarriedThrough()
     {
         var decision = ResultParser.ParseAccessDecision(
-            """{"granted":true,"rules":[],"provenance":{"providerId":"policy","attribution":{"name":"Policy","license":"internal"},"reproducibility":"reproducible","snapshotId":"3"}}""");
+            """{"granted":true,"rules":[],"warnings":[],"provenance":{"providerId":"policy","attribution":{"name":"Policy","license":"internal"},"reproducibility":"reproducible","snapshotId":"3"}}""");
 
         Assert.NotNull(decision.Provenance);
         Assert.Equal("3", decision.Provenance!.SnapshotId);

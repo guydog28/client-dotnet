@@ -1,3 +1,4 @@
+using EzClassify.Contract;
 namespace EzClassify.Tests;
 
 /// <summary>

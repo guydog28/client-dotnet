@@ -12,7 +12,7 @@ public wire surface. It is the repository's executable ownership contract.
 
 | Path | Purpose |
 |------|---------|
-| [`EzClassify.Rest.Contract/`](EzClassify.Rest.Contract/) | Wire models generated from the local [`vendor/spec/`](vendor/spec/) contract mirror, plus response parsers |
+| [`EzClassify.Contract/`](EzClassify.Contract/) | Wire models generated from the local [`vendor/spec/`](vendor/spec/) contract mirror, plus response parsers |
 | [`EzClassify.Rest.Client/`](EzClassify.Rest.Client/) | HTTP client (`EzClassifyClient`) for the REST API |
 | [`EzClassify.Rest.Tests/`](EzClassify.Rest.Tests/) | xUnit test suite; run via `make test` |
 | [`examples/server-tour/`](examples/server-tour/) | Runnable demo showing `EzClassifyClient` against a live REST API |
@@ -20,8 +20,8 @@ public wire surface. It is the repository's executable ownership contract.
 ## Build and Test
 
 ```sh
-make build   # dotnet build EzClassify.Rest.sln --configuration Release
-make test    # dotnet test  EzClassify.Rest.sln --configuration Release --filter "Category!=Live"
+make build   # dotnet build EzClassify.sln --configuration Release
+make test    # dotnet test  EzClassify.sln --configuration Release --filter "Category!=Live"
 make check-architecture # declaration ownership and central package versions
 make check-generated    # committed generated-source freshness
 ```

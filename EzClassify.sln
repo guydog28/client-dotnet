@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzClassify.Rest.Contract", "EzClassify.Rest.Contract\EzClassify.Rest.Contract.csproj", "{C1D2E3F4-A5B6-7890-1234-567890ABCDEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzClassify.Contract", "EzClassify.Contract\EzClassify.Contract.csproj", "{C1D2E3F4-A5B6-7890-1234-567890ABCDEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzClassify.Rest.Client", "EzClassify.Rest.Client\EzClassify.Rest.Client.csproj", "{D2E3F4A5-B6C7-8901-2345-678901BCDEF0}"
 EndProject

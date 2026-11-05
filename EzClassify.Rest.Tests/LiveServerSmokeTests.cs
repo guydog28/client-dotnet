@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

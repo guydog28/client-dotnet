@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Text.Json.Nodes;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

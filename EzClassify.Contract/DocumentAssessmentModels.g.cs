@@ -1,4 +1,4 @@
-// Code generated from the canonical OpenAPI contract (a67d51c926e7385cd1c12ae3d76a0c9836a1a3cf09d5feb104b9908d46e685e8) by gen.mjs@5cf243baa1066cacdc9db5123130bfc7cc034a1a04ecc014f5cbca1e4f02e6ba. DO NOT EDIT.
+// Code generated from the canonical OpenAPI contract (facd8f8e6db122d67aa679875e701fde677e3ad1914e6c6a9e13385d7745850d) by gen.mjs@af475b53bb3db87a45dafb0711ba6c513716523a9123788b2664df295b2d36ad. DO NOT EDIT.
 // Re-run via: make regen
 #nullable enable
 
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>Immutable artifact family.</summary>
 [JsonConverter(typeof(WireTokenJsonConverter<ArtifactKind>))]
@@ -153,140 +153,6 @@ public readonly struct DocumentResponseProfile : IEquatable<DocumentResponseProf
     string? IWireToken<DocumentResponseProfile>.Token => _value;
 
     DocumentResponseProfile IWireToken<DocumentResponseProfile>.FromToken(string value) => new(value);
-}
-
-/// <summary>Authority basis used for one document access scenario.</summary>
-[JsonConverter(typeof(WireTokenJsonConverter<AccessScenarioBasis>))]
-public readonly struct AccessScenarioBasis : IEquatable<AccessScenarioBasis>, IWireToken<AccessScenarioBasis>
-{
-    private const string AuthoredValue = "authored";
-    private const string AuthoritativeValue = "authoritative";
-    private const string ProjectedValue = "projected";
-
-    private readonly string? _value;
-
-    /// <summary>Wraps a wire token, whether or not this SDK declares it.</summary>
-    /// <param name="value">The token exactly as it travels on the wire.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    public AccessScenarioBasis(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
-
-    /// <summary>Authored markings only.</summary>
-    public static AccessScenarioBasis Authored { get; } = new(AuthoredValue);
-
-    /// <summary>Authored facts plus analyst determinations.</summary>
-    public static AccessScenarioBasis Authoritative { get; } = new(AuthoritativeValue);
-
-    /// <summary>Advisory unresolved-nomination projection.</summary>
-    public static AccessScenarioBasis Projected { get; } = new(ProjectedValue);
-
-    /// <summary>Whether this version of the SDK declares the token. False for a value a newer server sent.</summary>
-    public bool IsKnown => _value is AuthoredValue or AuthoritativeValue or ProjectedValue;
-
-    /// <summary>Decode a token a caller supplies; only a declared access scenario basis is accepted.</summary>
-    /// <param name="value">The wire token.</param>
-    /// <returns>The declared value.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is not a access scenario basis this SDK declares.</exception>
-    public static AccessScenarioBasis Parse(string value) => WireToken.Parse<AccessScenarioBasis>(value, "access scenario basis");
-
-    /// <summary>Decode a token a caller supplies without throwing; only a declared access scenario basis is accepted.</summary>
-    /// <param name="value">The wire token.</param>
-    /// <param name="result">The declared value, or <c>default</c> when the token is not declared.</param>
-    /// <returns>True when <paramref name="value"/> is a declared token.</returns>
-    public static bool TryParse(string? value, out AccessScenarioBasis result) => WireToken.TryParse(value, out result);
-
-    /// <summary>The wire token, exactly as it was received or constructed.</summary>
-    /// <exception cref="InvalidOperationException">The value is <c>default(AccessScenarioBasis)</c>, which carries no token.</exception>
-    public string ToWire() => WireToken.Require(_value, nameof(AccessScenarioBasis));
-
-    /// <summary>The wire token; empty for <c>default(AccessScenarioBasis)</c>.</summary>
-    public override string ToString() => _value ?? string.Empty;
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public bool Equals(AccessScenarioBasis other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-
-    /// <inheritdoc />
-    public override bool Equals(object? obj) => obj is AccessScenarioBasis other && Equals(other);
-
-    /// <inheritdoc />
-    public override int GetHashCode() => WireToken.Hash(_value);
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public static bool operator ==(AccessScenarioBasis left, AccessScenarioBasis right) => left.Equals(right);
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public static bool operator !=(AccessScenarioBasis left, AccessScenarioBasis right) => !left.Equals(right);
-
-    string? IWireToken<AccessScenarioBasis>.Token => _value;
-
-    AccessScenarioBasis IWireToken<AccessScenarioBasis>.FromToken(string value) => new(value);
-}
-
-/// <summary>Result status for one document access scenario.</summary>
-[JsonConverter(typeof(WireTokenJsonConverter<AccessScenarioStatus>))]
-public readonly struct AccessScenarioStatus : IEquatable<AccessScenarioStatus>, IWireToken<AccessScenarioStatus>
-{
-    private const string GrantedValue = "granted";
-    private const string DeniedValue = "denied";
-    private const string NotEvaluatedValue = "not-evaluated";
-
-    private readonly string? _value;
-
-    /// <summary>Wraps a wire token, whether or not this SDK declares it.</summary>
-    /// <param name="value">The token exactly as it travels on the wire.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    public AccessScenarioStatus(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
-
-    /// <summary>Access granted.</summary>
-    public static AccessScenarioStatus Granted { get; } = new(GrantedValue);
-
-    /// <summary>Access denied.</summary>
-    public static AccessScenarioStatus Denied { get; } = new(DeniedValue);
-
-    /// <summary>No effective target was evaluated.</summary>
-    public static AccessScenarioStatus NotEvaluated { get; } = new(NotEvaluatedValue);
-
-    /// <summary>Whether this version of the SDK declares the token. False for a value a newer server sent.</summary>
-    public bool IsKnown => _value is GrantedValue or DeniedValue or NotEvaluatedValue;
-
-    /// <summary>Decode a token a caller supplies; only a declared access scenario status is accepted.</summary>
-    /// <param name="value">The wire token.</param>
-    /// <returns>The declared value.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is not a access scenario status this SDK declares.</exception>
-    public static AccessScenarioStatus Parse(string value) => WireToken.Parse<AccessScenarioStatus>(value, "access scenario status");
-
-    /// <summary>Decode a token a caller supplies without throwing; only a declared access scenario status is accepted.</summary>
-    /// <param name="value">The wire token.</param>
-    /// <param name="result">The declared value, or <c>default</c> when the token is not declared.</param>
-    /// <returns>True when <paramref name="value"/> is a declared token.</returns>
-    public static bool TryParse(string? value, out AccessScenarioStatus result) => WireToken.TryParse(value, out result);
-
-    /// <summary>The wire token, exactly as it was received or constructed.</summary>
-    /// <exception cref="InvalidOperationException">The value is <c>default(AccessScenarioStatus)</c>, which carries no token.</exception>
-    public string ToWire() => WireToken.Require(_value, nameof(AccessScenarioStatus));
-
-    /// <summary>The wire token; empty for <c>default(AccessScenarioStatus)</c>.</summary>
-    public override string ToString() => _value ?? string.Empty;
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public bool Equals(AccessScenarioStatus other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-
-    /// <inheritdoc />
-    public override bool Equals(object? obj) => obj is AccessScenarioStatus other && Equals(other);
-
-    /// <inheritdoc />
-    public override int GetHashCode() => WireToken.Hash(_value);
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public static bool operator ==(AccessScenarioStatus left, AccessScenarioStatus right) => left.Equals(right);
-
-    /// <summary>Ordinal comparison of the wire tokens.</summary>
-    public static bool operator !=(AccessScenarioStatus left, AccessScenarioStatus right) => !left.Equals(right);
-
-    string? IWireToken<AccessScenarioStatus>.Token => _value;
-
-    AccessScenarioStatus IWireToken<AccessScenarioStatus>.FromToken(string value) => new(value);
 }
 
 /// <summary>Source domain for an access-comparison operand.</summary>
@@ -1027,81 +893,6 @@ public record DocumentGuideAssessment(
     CoverageReport? ProjectedWholeCoverage,
     GuideContentEvaluation? Evaluation = null);
 
-/// <summary>Effective marking and assertions evaluated in one access scenario.</summary>
-/// <param name="Basis">Authority basis used to construct the target.</param>
-/// <param name="Marking">Scheme-rendered effective marking.</param>
-/// <param name="Assertions">Effective assertions evaluated by access policy, listed in print order: the order <c>marking</c> places each concept; a concept it leaves out appears where it would print.</param>
-/// <param name="AuthoredParts">Authored part markings.</param>
-/// <param name="AuthoredWhole">Authored document-wide marking when present.</param>
-/// <param name="DeterminedGuideRequiredWhole">Whole required by accepted/manual guide facts.</param>
-/// <param name="ProjectedGuideRequiredWhole">Advisory whole additionally assuming unresolved nominations.</param>
-public record EffectiveDocumentTarget(
-    AccessScenarioBasis Basis,
-    string Marking,
-    IReadOnlyList<Assertion> Assertions,
-    IReadOnlyList<string> AuthoredParts,
-    string? AuthoredWhole = null,
-    string? DeterminedGuideRequiredWhole = null,
-    string? ProjectedGuideRequiredWhole = null);
-
-/// <summary>Traceable document-side requirement after an access denial.</summary>
-/// <param name="Rule">Access rule that denied the effective target.</param>
-/// <param name="Assertion">Blocking content-derived assertion.</param>
-/// <param name="SupportIds">Assertion support records proving the content lineage.</param>
-/// <param name="Instruction">Conditional instruction that does not synthesize replacement text.</param>
-/// <param name="VerificationRequired">Revised content must always be reassessed.</param>
-public record ContentChangeRequirement(
-    RuleReference Rule,
-    AssertionReference Assertion,
-    IReadOnlyList<string> SupportIds,
-    string Instruction,
-    bool VerificationRequired);
-
-/// <summary>Conditional external relationship required by an access rule.</summary>
-/// <param name="Rule">Access rule requiring the relationship.</param>
-/// <param name="SubjectPath">Immutable subject operand path.</param>
-/// <param name="ContextPath">Supplied context operand path.</param>
-/// <param name="Operator">Comparison operator.</param>
-/// <param name="Instruction">Conditional explanation of the external-state prerequisite.</param>
-/// <param name="AcceptableValues">Context values that would satisfy the relationship, when known.</param>
-public record SubjectContextRequirement(
-    RuleReference Rule,
-    string SubjectPath,
-    string ContextPath,
-    string Operator,
-    string Instruction,
-    IReadOnlyList<JsonElement?>? AcceptableValues = null);
-
-/// <summary>Access result for one authority basis.</summary>
-/// <param name="Basis">Authority basis of this scenario.</param>
-/// <param name="Advisory">Whether the scenario is advisory rather than authoritative.</param>
-/// <param name="Status">Closed evaluation status.</param>
-/// <param name="Target">Effective target, or null when none can be derived.</param>
-/// <param name="Limitations">Scenario-specific limitations.</param>
-/// <param name="Decision">Access decision, omitted for summary and not-evaluated scenarios.</param>
-/// <param name="ContentRequirements">Traceable document-side requirements, omitted by summary.</param>
-/// <param name="ContextRequirements">Conditional relationship requirements, omitted by summary.</param>
-public record AccessScenarioAssessment(
-    AccessScenarioBasis Basis,
-    bool Advisory,
-    AccessScenarioStatus Status,
-    EffectiveDocumentTarget? Target,
-    IReadOnlyList<AssessmentLimitation> Limitations,
-    AccessDecision? Decision = null,
-    IReadOnlyList<ContentChangeRequirement>? ContentRequirements = null,
-    IReadOnlyList<SubjectContextRequirement>? ContextRequirements = null);
-
-/// <summary>Three-scenario document access result without a fused decision.</summary>
-/// <param name="Audit">Structural and guide audit used to build every scenario.</param>
-/// <param name="Authored">Decision based only on authored markings.</param>
-/// <param name="Authoritative">Decision including accepted findings and manual selections.</param>
-/// <param name="Projected">Advisory unresolved-nomination scenario when it adds an assertion.</param>
-public record DocumentAccessAssessment(
-    DocumentAuditReport Audit,
-    AccessScenarioAssessment Authored,
-    AccessScenarioAssessment Authoritative,
-    AccessScenarioAssessment? Projected);
-
 /// <summary>Resolved Context envelope returned by document audit.</summary>
 /// <param name="Resolution">Single resolved composition used throughout the operation.</param>
 /// <param name="Result">Typed operation result.</param>
@@ -1110,16 +901,5 @@ public record DocumentAccessAssessment(
 public record ContextDocumentAuditResult(
     ContextResolution Resolution,
     DocumentAuditReport Result,
-    IReadOnlyList<AssessmentLimitation> OperationLimitations,
-    DocumentResponseProjection ResponseProjection);
-
-/// <summary>Resolved Context envelope returned by document access assessment.</summary>
-/// <param name="Resolution">Single resolved composition used throughout the operation.</param>
-/// <param name="Result">Typed operation result.</param>
-/// <param name="OperationLimitations">Limitations applying to the operation as a whole.</param>
-/// <param name="ResponseProjection">Projection metadata, present only for document operations.</param>
-public record ContextDocumentAccessAssessmentResult(
-    ContextResolution Resolution,
-    DocumentAccessAssessment Result,
     IReadOnlyList<AssessmentLimitation> OperationLimitations,
     DocumentResponseProjection ResponseProjection);

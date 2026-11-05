@@ -55,7 +55,7 @@ LICENSE_URL_MAP = {
 # netstandard2.0 targets but are compile-time targeting-pack references, not
 # shipped dependencies: NETStandard.Library is auto-referenced by the SDK and
 # Microsoft.NETCore.Platforms is reachable only through it. Verified against
-# the packed nuspec: `dotnet pack EzClassify.Rest.Contract` declares only
+# the packed nuspec: `dotnet pack EzClassify.Contract` declares only
 # System.Text.Json as a dependency. If a new dependency path ever pulls one
 # of these at runtime, the packed nuspec (and this claim) must be re-checked.
 BUILD_TIME_ONLY = {"netstandard.library", "microsoft.netcore.platforms"}

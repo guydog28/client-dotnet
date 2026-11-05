@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using YamlDotNet.RepresentationModel;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -110,10 +111,10 @@ public class WireEnumSpecTests
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir != null)
         {
-            if (File.Exists(Path.Combine(dir.FullName, "EzClassify.Rest.sln")))
+            if (File.Exists(Path.Combine(dir.FullName, "EzClassify.sln")))
                 return dir.FullName;
             dir = dir.Parent;
         }
-        throw new DirectoryNotFoundException("Cannot locate EzClassify.Rest.sln");
+        throw new DirectoryNotFoundException("Cannot locate EzClassify.sln");
     }
 }

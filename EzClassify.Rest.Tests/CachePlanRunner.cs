@@ -9,6 +9,7 @@ using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

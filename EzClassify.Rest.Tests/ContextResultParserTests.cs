@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -191,7 +192,7 @@ public class ContextResultParserTests
     public void ParseAccessDecision_PreservesNestedOperandsQualifiedRuleAndModernization()
     {
         var json = $$"""
-            {"granted":false,"rules":[{"ruleIndex":0,"name":"membership","granted":false,"skipped":false,
+            {"granted":false,"warnings":[],"rules":[{"ruleIndex":0,"name":"membership","granted":false,"skipped":false,
               "activation":{"matched":true,"assertions":[{"categoryId":"level","conceptId":"HIGH"}],"contextPaths":["distribution.team"]},
               "comparisons":[{"left":{"source":"subject","path":"membership"},"operator":"contains","right":{"source":"literal","value":"HIGH"},"matched":false,"missing":["HIGH"]}],
               "rule":{{Rule}},"reason":"membership required",

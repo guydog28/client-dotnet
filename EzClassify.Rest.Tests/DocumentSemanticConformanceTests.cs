@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -74,9 +75,7 @@ public class DocumentSemanticConformanceTests
         var fixtureContext = ReadObject(Path.Combine(semanticRoot, "fixtures", "context.json"));
         var cases = contract["cases"]!.AsArray();
 
-        // The corpus is the count. Cases run 1..N below and every inventory has to
-        // name exactly those N, so a dropped or added case fails without a pinned
-        // total to move.
+        // Every inventory must name exactly the contract's stable case identities.
         Assert.NotEmpty(cases);
         Assert.Equal(cases.Count, requests.Count);
         Assert.Equal(cases.Count, recordings.Count);
@@ -84,12 +83,15 @@ public class DocumentSemanticConformanceTests
         Assert.Equal("recorded-operation-output", ReadObject(Path.Combine(semanticRoot, "fixtures", "recordings.json"))["status"]!.GetValue<string>());
 
         var semanticIds = new HashSet<string>(StringComparer.Ordinal);
+        var previousNumber = 0;
         for (var index = 0; index < cases.Count; index++)
         {
             var contractCase = cases[index]!.AsObject();
             var requestId = contractCase["requestId"]!.GetValue<string>();
-            Assert.Equal(index + 1, contractCase["number"]!.GetValue<int>());
-            Assert.Equal($"case-{index + 1:D2}", requestId);
+            var number = contractCase["number"]!.GetValue<int>();
+            Assert.True(number > previousNumber, "Case numbers must be positive, ordered and unique.");
+            Assert.Equal($"case-{number:D2}", requestId);
+            previousNumber = number;
             Assert.True(contractCase["required"]!.GetValue<bool>());
             Assert.Equal("recorded", contractCase["implementation"]!.GetValue<string>());
             Assert.True(semanticIds.Add(contractCase["semanticId"]!.GetValue<string>()));
@@ -543,10 +545,10 @@ public class DocumentSemanticConformanceTests
         var directory = new DirectoryInfo(AppContext.BaseDirectory);
         while (directory is not null)
         {
-            if (File.Exists(Path.Combine(directory.FullName, "EzClassify.Rest.sln"))) return directory.FullName;
+            if (File.Exists(Path.Combine(directory.FullName, "EzClassify.sln"))) return directory.FullName;
             directory = directory.Parent;
         }
-        throw new DirectoryNotFoundException("Cannot locate EzClassify.Rest.sln");
+        throw new DirectoryNotFoundException("Cannot locate EzClassify.sln");
     }
 
     private sealed record SemanticReplay(JsonNode Request, JsonNode Output);

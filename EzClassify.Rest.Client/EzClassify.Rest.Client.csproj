@@ -15,7 +15,7 @@
          HttpClient disposal when the connect probe throws) that the public
          surface cannot observe. -->
     <InternalsVisibleTo Include="EzClassify.Rest.Tests"></InternalsVisibleTo>
-    <ProjectReference Include="..\EzClassify.Rest.Contract\EzClassify.Rest.Contract.csproj"></ProjectReference>
+    <ProjectReference Include="..\EzClassify.Contract\EzClassify.Contract.csproj"></ProjectReference>
     <None Include="README.md" Pack="true" PackagePath="\"></None>
     <None Include="..\LICENSE" Pack="true" PackagePath="\"></None>
   </ItemGroup>

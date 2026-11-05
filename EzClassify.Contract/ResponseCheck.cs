@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>
 /// One node of a response shape: what a JSON value must be, and for an object

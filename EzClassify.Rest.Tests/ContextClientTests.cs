@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -226,7 +227,7 @@ public class ContextClientTests
     {
         var routes = new Dictionary<string, (HttpStatusCode, string)>
         {
-            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": false, "rules": [] }"""),
+            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": false, "rules": [], "warnings": [] }"""),
         };
         var (client, handler) = await CtxClientFactory.ConnectAsync(routes);
         using (client)
@@ -1902,7 +1903,7 @@ public class ContextClientTests
     {
         var routes = new Dictionary<string, (HttpStatusCode, string)>
         {
-            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": true, "rules": [ { "name": "Membership", "granted": true, "skipped": false, "ruleIndex": 0, "activation":{"matched":true,"assertions":[],"contextPaths":[]}, "comparisons":[], "rule":{"artifact":{"kind":"access","id":"ap","version":"1.0.0"},"ruleId":"r1","ruleDigest":"sha256:r1"} } ] }"""),
+            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": true, "warnings": [], "rules": [ { "name": "Membership", "granted": true, "skipped": false, "ruleIndex": 0, "activation":{"matched":true,"assertions":[],"contextPaths":[]}, "comparisons":[], "rule":{"artifact":{"kind":"access","id":"ap","version":"1.0.0"},"ruleId":"r1","ruleDigest":"sha256:r1"} } ] }"""),
         };
         var (client, handler) = await CtxClientFactory.ConnectAsync(routes);
         using (client)
@@ -1925,7 +1926,7 @@ public class ContextClientTests
     {
         var routes = new Dictionary<string, (HttpStatusCode, string)>
         {
-            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": false, "rules": [] }"""),
+            ["/access/check"] = (HttpStatusCode.OK, """{ "granted": false, "rules": [], "warnings": [] }"""),
         };
         var (client, handler) = await CtxClientFactory.ConnectAsync(routes);
         using (client)

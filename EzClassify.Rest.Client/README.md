@@ -1,7 +1,7 @@
 # EzClassify.Rest.Client
 
 HTTP client for the EzClassify REST API, using `System.Net.Http` and
-`System.Text.Json`. It depends on `EzClassify.Rest.Contract` for wire models
+`System.Text.Json`. It depends on `EzClassify.Contract` for wire models
 and uses no third-party HTTP stack.
 
 ## Install
@@ -20,6 +20,7 @@ npx @ezclassify/conformance-server --scenario cedar-valley --port 4010
 
 ```csharp
 using EzClassify;
+using EzClassify.Contract;
 
 using var ctx = await EzClassifyClient.ConnectAsync(
     "http://127.0.0.1:4010", "cedar-valley", "1.0.0");
@@ -40,6 +41,7 @@ Change the base URL and supply the tokens your runtime administrator issued. The
 
 ```csharp
 using EzClassify;
+using EzClassify.Contract;
 
 // Supplied by the runtime administrator; keep tokens out of source control.
 var credentials = new RestClientCredentials(

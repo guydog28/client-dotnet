@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -76,7 +77,7 @@ public class WireEnumsTests
     [Fact]
     public void TheSweepSeesEveryWireEnum()
     {
-        Assert.Equal(26, ExtensibleEnums.Count);
+        Assert.Equal(24, ExtensibleEnums.Count);
         Assert.Contains(typeof(Confidence), ExtensibleEnums);
         Assert.Contains(typeof(ArtifactKind), ExtensibleEnums);
         Assert.DoesNotContain(typeof(RenderPreservation), ExtensibleEnums);

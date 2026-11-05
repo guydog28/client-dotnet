@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Security.Cryptography;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

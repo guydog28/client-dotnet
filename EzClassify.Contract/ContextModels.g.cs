@@ -1,11 +1,11 @@
-// Code generated from the canonical OpenAPI contract (089751b5f0dd00c0ffc07efc68969f7b019324b214421f97b7069e00893fa9d2) by gen.mjs@5cf243baa1066cacdc9db5123130bfc7cc034a1a04ecc014f5cbca1e4f02e6ba. DO NOT EDIT.
+// Code generated from the canonical OpenAPI contract (f84bf115187b0d7705d2e8223b07204567f33d351e9bb90a95bacdb7373d0ec4) by gen.mjs@af475b53bb3db87a45dafb0711ba6c513716523a9123788b2664df295b2d36ad. DO NOT EDIT.
 // Re-run via: make regen
 #nullable enable
 
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 // Result shapes returned by the context-bound engine operations
 // (/v1/ctx/{ctxId}/{version}/*). These mirror the adapter contracts in
@@ -114,7 +114,7 @@ public record TraceEntry(
 /// One repair the engine applied while normalizing malformed input, with the
 /// before/after strings. <see cref="Confidence"/> is an open string
 /// (<c>'safe'</c> | <c>'uncertain'</c> are documented) rather than the typed
-/// <see cref="EzClassify.Confidence"/>; the repair confidence vocabulary
+/// <see cref="EzClassify.Contract.Confidence"/>; the repair confidence vocabulary
 /// is a distinct, deliberately open set on the wire.
 /// </summary>
 /// <param name="RuleId">The id of the repair rule that fired.</param>

@@ -1,4 +1,4 @@
-// Code generated from json-schemas@128fa98ab01e961965eee54c4249ef332176a52fa5a2edecba3e58a626e5836b by gen.mjs@5cf243baa1066cacdc9db5123130bfc7cc034a1a04ecc014f5cbca1e4f02e6ba. DO NOT EDIT.
+// Code generated from json-schemas@5008012188d683245b963294231e582aed7be379f816f4d780aae2bfbbc47aeb by gen.mjs@af475b53bb3db87a45dafb0711ba6c513716523a9123788b2664df295b2d36ad. DO NOT EDIT.
 // Re-run via: make regen
 #nullable enable
 #pragma warning disable CS1573
@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>A concept asserted in a category during processing, with confidence and provenance metadata.</summary>
 /// <param name="CategoryId">The id of the category the concept is asserted in.</param>
@@ -403,9 +403,11 @@ public record AccessRuleResult(
 /// <summary>Overall access decision with per-rule breakdown for a labeled artifact.</summary>
 /// <param name="Granted">True when every rule that was not skipped granted access.</param>
 /// <param name="Rules">One result per rule in the policy, in policy order.</param>
+/// <param name="Warnings">Warnings from preparing and evaluating the target, including automatic changes. Present on granted and denied decisions; empty when none apply.</param>
 /// <param name="Provenance">Source provenance for the access-rule source that evaluated this decision.</param>
 public record AccessDecision(
     bool Granted,
     IReadOnlyList<AccessRuleResult> Rules,
+    IReadOnlyList<Warning> Warnings,
     SourceReference? Provenance = null
 );

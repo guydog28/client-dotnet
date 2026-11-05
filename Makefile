@@ -4,8 +4,8 @@
 # `make regen` reads from here and rewrites the committed Models.g.cs; CI reruns
 # the generator and diffs the tree, so a stale or hand-edited Models.g.cs fails CI.
 VENDOR_SCHEMAS := vendor/spec/json-schemas
-GENERATED_MODELS := EzClassify.Rest.Contract/Models.g.cs
-GEN_SCRIPT := EzClassify.Rest.Contract/scripts/gen.mjs
+GENERATED_MODELS := EzClassify.Contract/Models.g.cs
+GEN_SCRIPT := EzClassify.Contract/scripts/gen.mjs
 DOTNET := dotnet
 
 .PHONY: docs
@@ -30,18 +30,18 @@ check-architecture:
 	node scripts/check-architecture.mjs
 
 build:
-	$(DOTNET) build EzClassify.Rest.sln --configuration Release
+	$(DOTNET) build EzClassify.sln --configuration Release
 
 # The Live category needs a running server; `make smoke` runs it.
 test:
-	$(DOTNET) test EzClassify.Rest.sln --configuration Release --filter "Category!=Live"
+	$(DOTNET) test EzClassify.sln --configuration Release --filter "Category!=Live"
 
 test-verbose:
-	$(DOTNET) test EzClassify.Rest.sln --configuration Release --filter "Category!=Live" --logger "console;verbosity=detailed" -m:1
+	$(DOTNET) test EzClassify.sln --configuration Release --filter "Category!=Live" --logger "console;verbosity=detailed" -m:1
 
 # Requires a caller-provided licensed, content-configured REST deployment.
 smoke:
-	EZC_SMOKE_URL=$(URL) $(DOTNET) test EzClassify.Rest.sln --configuration Release --filter "Category=Live"
+	EZC_SMOKE_URL=$(URL) $(DOTNET) test EzClassify.sln --configuration Release --filter "Category=Live"
 
 # 1.0 public-surface freeze. The public API of the two shipped assemblies is a
 # locked contract; PublicApiSurfaceTests reflects it into a sorted text dump and
@@ -51,10 +51,10 @@ smoke:
 # (a spec update followed by `make regen`) also changes the surface, so
 # regenerate the golden in the same commit.
 check-api-surface: build
-	$(DOTNET) test EzClassify.Rest.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"
+	$(DOTNET) test EzClassify.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"
 
 api-surface: build
-	UPDATE_API_SURFACE=1 $(DOTNET) test EzClassify.Rest.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"
+	UPDATE_API_SURFACE=1 $(DOTNET) test EzClassify.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"
 	@echo "Rewrote EzClassify.Rest.Tests/PublicApiSurface.golden.txt; review and commit it with your API change"
 
 clean:

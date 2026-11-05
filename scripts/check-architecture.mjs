@@ -7,11 +7,11 @@ import { fileURLToPath } from 'url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'vendor/spec/MANIFEST.json'), 'utf8'));
 const expectedGenerated = [
-  'EzClassify.Rest.Contract/ContextEnvelopeModels.g.cs',
-  'EzClassify.Rest.Contract/ContextModels.g.cs',
-  'EzClassify.Rest.Contract/DocumentAssessmentModels.g.cs',
-  'EzClassify.Rest.Contract/Models.g.cs',
-  'EzClassify.Rest.Contract/WireEnums.g.cs',
+  'EzClassify.Contract/ContextEnvelopeModels.g.cs',
+  'EzClassify.Contract/ContextModels.g.cs',
+  'EzClassify.Contract/DocumentAssessmentModels.g.cs',
+  'EzClassify.Contract/Models.g.cs',
+  'EzClassify.Contract/WireEnums.g.cs',
 ];
 const errors = [];
 
@@ -65,7 +65,7 @@ for (const absolute of walk(root, '.cs')) {
       errors.push(`Shadow declaration for generated ${match[1]} in ${relative}.`);
       reportedShadows.add(match[1]);
     }
-    if (relative.startsWith('EzClassify.Rest.Contract/')) {
+    if (relative.startsWith('EzClassify.Contract/')) {
       errors.push(`Wire declaration ${match[1]} must be generator-owned, not declared in ${relative}.`);
     }
   }

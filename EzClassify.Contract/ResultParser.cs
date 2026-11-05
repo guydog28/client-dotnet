@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>Static JSON parsing helpers for EzClassify API result types.</summary>
 /// <remarks>
@@ -62,9 +62,11 @@ public static class ResultParser
         Kind: new WarningKind(JsonRead.RequiredString(w, "kind")),
         Message: JsonRead.RequiredString(w, "message"),
         ConceptId: JsonRead.OptionalString(w, "conceptId"),
+        ConceptName: JsonRead.OptionalString(w, "conceptName"),
         CategoryId: JsonRead.OptionalString(w, "categoryId"),
         RuleId: JsonRead.OptionalString(w, "ruleId"),
-        Replacement: JsonRead.OptionalString(w, "replacement")
+        Replacement: JsonRead.OptionalString(w, "replacement"),
+        ReplacementName: JsonRead.OptionalString(w, "replacementName")
     );
 
     /// <summary>Parse a concept reference (conceptId + categoryId) from a JSON element.</summary>
@@ -645,6 +647,7 @@ public static class ResultParser
                 Skipped: JsonRead.RequiredBool(rule, "skipped"),
                 ModernizedFrom: JsonRead.TolerantOptionalList(rule, "modernizedFrom", ReadConceptModernization),
                 Reason: JsonRead.OptionalString(rule, "reason"))),
+            Warnings: JsonRead.RequiredList(root, "warnings", ReadWarning),
             Provenance: root.TryGetProperty("provenance", out var provenance) && provenance.ValueKind == JsonValueKind.Object
                 ? ContextResultParser.ReadSourceReference(provenance)
                 : null

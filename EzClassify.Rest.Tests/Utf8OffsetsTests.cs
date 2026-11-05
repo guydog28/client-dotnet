@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

@@ -8,7 +8,7 @@ models, restore SDK project dependencies, or run SDK builds and tests.
 Build it from an otherwise empty context containing this Dockerfile:
 
 ```sh
-docker build --pull=false --file dotnet-toolchain.Dockerfile --tag ezclassify/client-dotnet-toolchain:local .
+docker build --pull=false --file dotnet-toolchain.Dockerfile --tag ezclassify/sdk-dotnet-toolchain:local .
 ```
 
 Run the repository's normal `make regen`, `make build`, `make test` and

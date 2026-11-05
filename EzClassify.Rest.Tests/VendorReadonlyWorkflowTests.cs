@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 

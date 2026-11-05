@@ -4,8 +4,8 @@
 set -euo pipefail
 
 SCHEMAS_DIR="${1:-vendor/spec/json-schemas}"
-SCRIPT="EzClassify.Rest.Contract/scripts/gen.mjs"
-OUTFILE="EzClassify.Rest.Contract/Models.g.cs"
+SCRIPT="EzClassify.Contract/scripts/gen.mjs"
+OUTFILE="EzClassify.Contract/Models.g.cs"
 OPENAPI_FILE="vendor/spec/openapi.yaml"
 
 if [ ! -d "${SCHEMAS_DIR}" ]; then

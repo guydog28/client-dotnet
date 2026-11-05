@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>
 /// JSON parsing helpers for the context-bound operation result types. Reuses the

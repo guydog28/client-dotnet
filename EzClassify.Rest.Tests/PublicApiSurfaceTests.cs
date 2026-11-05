@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -33,7 +34,7 @@ public class PublicApiSurfaceTests
     // the whole assembly each type lives in.
     private static readonly Type[] AssemblyAnchors =
     {
-        typeof(EzClassify.ResultParser),           // EzClassify.Rest.Contract
+        typeof(EzClassify.Contract.ResultParser),           // EzClassify.Contract
         typeof(EzClassify.EzClassifyClient),       // EzClassify.Rest.Client
     };
 
@@ -110,11 +111,11 @@ public class PublicApiSurfaceTests
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir != null)
         {
-            if (File.Exists(Path.Combine(dir.FullName, "EzClassify.Rest.sln")))
+            if (File.Exists(Path.Combine(dir.FullName, "EzClassify.sln")))
                 return dir.FullName;
             dir = dir.Parent;
         }
-        throw new DirectoryNotFoundException("Cannot locate EzClassify.Rest.sln");
+        throw new DirectoryNotFoundException("Cannot locate EzClassify.sln");
     }
 
     // ---- surface rendering -------------------------------------------------

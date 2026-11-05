@@ -1,4 +1,5 @@
 using Xunit;
+using EzClassify.Contract;
 
 namespace EzClassify.Tests;
 
@@ -113,6 +114,7 @@ public class ResultParserTests
         const string json = """
             {
               "granted": true,
+              "warnings": [],
               "rules": [
                 { "name": "Level Check", "granted": true, "skipped": false, "ruleIndex": 0,
                   "activation":{"matched":true,"assertions":[],"contextPaths":[]}, "comparisons":[],
@@ -122,6 +124,7 @@ public class ResultParserTests
             """;
         var decision = ResultParser.ParseAccessDecision(json);
         Assert.True(decision.Granted);
+        Assert.Empty(decision.Warnings);
         Assert.Single(decision.Rules);
         Assert.True(decision.Rules[0].Granted);
         Assert.Equal("rule-1", decision.Rules[0].Rule.RuleId);

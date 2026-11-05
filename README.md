@@ -1,11 +1,11 @@
 # <img src="assets/icon.svg" alt="" width="32"> EzClassify .NET SDK
 
-[![CI](https://github.com/ezclassify/client-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/ezclassify/client-dotnet/actions/workflows/ci.yml)
+[![CI](https://github.com/ezclassify/sdk-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/ezclassify/sdk-dotnet/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/EzClassify.Rest.Client?label=EzClassify.Rest.Client)](https://www.nuget.org/packages/EzClassify.Rest.Client)
 [![license: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![.NET](https://img.shields.io/badge/.NET-netstandard2.0%20%7C%20net8.0-512BD4.svg)](EzClassify.Rest.sln)
+[![.NET](https://img.shields.io/badge/.NET-netstandard2.0%20%7C%20net8.0-512BD4.svg)](EzClassify.sln)
 
-Apache-licensed HTTP client for a licensed EzClassify REST runtime. It contains generated models and client ergonomics, not the proprietary engine or enterprise content. Most apps only need `EzClassify.Rest.Client`, which pulls in `EzClassify.Rest.Contract`.
+Apache-licensed HTTP client for a licensed EzClassify REST runtime. It contains generated models and client ergonomics, not the proprietary engine or enterprise content. Most apps only need `EzClassify.Rest.Client`, which pulls in `EzClassify.Contract`.
 
 The [ezclassify/contracts](https://github.com/ezclassify/contracts) repository owns
 document and wire types; EzClassify Runtime owns
@@ -19,7 +19,7 @@ health and Context discovery use the deployment endpoint.
 dotnet add package EzClassify.Rest.Client
 ```
 
-`EzClassify.Rest.Contract` comes in as a dependency; add it directly if you only need the model records. Both packages target `netstandard2.0`, and `Client` also ships a `net8.0` build. CI builds and tests on .NET 10; the `netstandard2.0` output is what a .NET Framework 4.7.2+ host would load, but no job exercises it there.
+`EzClassify.Contract` comes in as a dependency; add it directly if you only need the model records. Both packages target `netstandard2.0`, and `Client` also ships a `net8.0` build. CI builds and tests on .NET 10; the `netstandard2.0` output is what a .NET Framework 4.7.2+ host would load, but no job exercises it there.
 
 ## Quick start
 
@@ -33,6 +33,7 @@ Then connect with the normal client. The Context is `cedar-valley`, version `1.0
 
 ```csharp
 using EzClassify;
+using EzClassify.Contract;
 
 using var ctx = await EzClassifyClient.ConnectAsync(
     "http://127.0.0.1:4010", "cedar-valley", "1.0.0");
@@ -60,6 +61,7 @@ Change the base URL and supply the credentials your runtime administrator issued
 
 ```csharp
 using EzClassify;
+using EzClassify.Contract;
 
 // Supplied by the runtime administrator; keep tokens out of source control.
 var credentials = new RestClientCredentials(
@@ -246,6 +248,7 @@ A denied access decision is a successful response with `granted: false`; handle 
 
 ```csharp
 using EzClassify;
+using EzClassify.Contract;
 
 try
 {

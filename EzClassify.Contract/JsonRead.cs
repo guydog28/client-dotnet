@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 /// <summary>
 /// Shared JSON reading primitives for the response parsers.

@@ -11,7 +11,7 @@ records the contracts commit, contract hashes, generator inputs, and committed
 generated outputs.
 
 The repository follows the conventional .NET layout: the root
-[`EzClassify.Rest.sln`](EzClassify.Rest.sln) contains two published libraries, the xUnit test project,
+[`EzClassify.sln`](EzClassify.sln) contains two published libraries, the xUnit test project,
 and the [`examples/server-tour/`](examples/server-tour/) application. [`Directory.Build.props`](Directory.Build.props) owns common compiler and
 package metadata. [`Directory.Packages.props`](Directory.Packages.props) is the only place NuGet dependency
 versions are declared. Each project file keeps only project-specific settings,
@@ -19,22 +19,22 @@ references, and packaging content.
 
 ## Generated code
 
-[`EzClassify.Rest.Contract/scripts/gen.mjs`](EzClassify.Rest.Contract/scripts/gen.mjs) consumes
+[`EzClassify.Contract/scripts/gen.mjs`](EzClassify.Contract/scripts/gen.mjs) consumes
 [`vendor/spec/openapi.yaml`](vendor/spec/openapi.yaml), [`vendor/spec/json-schemas/`](vendor/spec/json-schemas/), and these pinned
 templates:
 
-- [`EzClassify.Rest.Contract/scripts/templates/ContextEnvelopeModels.g.cs.tmpl`](EzClassify.Rest.Contract/scripts/templates/ContextEnvelopeModels.g.cs.tmpl)
-- [`EzClassify.Rest.Contract/scripts/templates/ContextModels.g.cs.tmpl`](EzClassify.Rest.Contract/scripts/templates/ContextModels.g.cs.tmpl)
-- [`EzClassify.Rest.Contract/scripts/templates/DocumentAssessmentModels.g.cs.tmpl`](EzClassify.Rest.Contract/scripts/templates/DocumentAssessmentModels.g.cs.tmpl)
-- [`EzClassify.Rest.Contract/scripts/templates/WireEnums.g.cs.tmpl`](EzClassify.Rest.Contract/scripts/templates/WireEnums.g.cs.tmpl)
+- [`EzClassify.Contract/scripts/templates/ContextEnvelopeModels.g.cs.tmpl`](EzClassify.Contract/scripts/templates/ContextEnvelopeModels.g.cs.tmpl)
+- [`EzClassify.Contract/scripts/templates/ContextModels.g.cs.tmpl`](EzClassify.Contract/scripts/templates/ContextModels.g.cs.tmpl)
+- [`EzClassify.Contract/scripts/templates/DocumentAssessmentModels.g.cs.tmpl`](EzClassify.Contract/scripts/templates/DocumentAssessmentModels.g.cs.tmpl)
+- [`EzClassify.Contract/scripts/templates/WireEnums.g.cs.tmpl`](EzClassify.Contract/scripts/templates/WireEnums.g.cs.tmpl)
 
 It owns the five committed outputs named by [`vendor/spec/MANIFEST.json`](vendor/spec/MANIFEST.json):
 
-- [`EzClassify.Rest.Contract/ContextEnvelopeModels.g.cs`](EzClassify.Rest.Contract/ContextEnvelopeModels.g.cs)
-- [`EzClassify.Rest.Contract/ContextModels.g.cs`](EzClassify.Rest.Contract/ContextModels.g.cs)
-- [`EzClassify.Rest.Contract/DocumentAssessmentModels.g.cs`](EzClassify.Rest.Contract/DocumentAssessmentModels.g.cs)
-- [`EzClassify.Rest.Contract/Models.g.cs`](EzClassify.Rest.Contract/Models.g.cs)
-- [`EzClassify.Rest.Contract/WireEnums.g.cs`](EzClassify.Rest.Contract/WireEnums.g.cs)
+- [`EzClassify.Contract/ContextEnvelopeModels.g.cs`](EzClassify.Contract/ContextEnvelopeModels.g.cs)
+- [`EzClassify.Contract/ContextModels.g.cs`](EzClassify.Contract/ContextModels.g.cs)
+- [`EzClassify.Contract/DocumentAssessmentModels.g.cs`](EzClassify.Contract/DocumentAssessmentModels.g.cs)
+- [`EzClassify.Contract/Models.g.cs`](EzClassify.Contract/Models.g.cs)
+- [`EzClassify.Contract/WireEnums.g.cs`](EzClassify.Contract/WireEnums.g.cs)
 
 Every output carries a generated ownership header. Do not edit an output
 directly; change the canonical contract or the appropriate generator input and
@@ -45,7 +45,7 @@ run `make regen`. `make check-generated` is the non-mutating freshness gate.
 The SDK owns language-native HTTP transport and connection lifecycle in the
 [`EzClassify.Rest.Client/`](EzClassify.Rest.Client/) project directory, and thin Context operation groups over canonical
 endpoints. In the
-[`EzClassify.Rest.Contract/`](EzClassify.Rest.Contract/) project directory, handwritten code is limited to defensive response
+[`EzClassify.Contract/`](EzClassify.Contract/) project directory, handwritten code is limited to defensive response
 parsers, UTF-8 offset helpers, compatibility support, and public error handling.
 
 Parsers refuse a response that lacks any member the contract requires, at any
@@ -84,11 +84,11 @@ project toward the shared Contract project, never back toward transport.
   declaration owners, generated-path drift, and inline package versions.
 - `make check-generated` verifies all five committed outputs against the pinned
   generator, templates, OpenAPI, and JSON Schemas.
-- `dotnet format EzClassify.Rest.sln --verify-no-changes --no-restore`
-- `dotnet build EzClassify.Rest.sln --no-restore --configuration Release`
-- `dotnet test EzClassify.Rest.sln --no-build --configuration Release --filter "Category!=Live"`
-- `dotnet test EzClassify.Rest.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"`
-- `dotnet test EzClassify.Rest.sln --no-build --configuration Release --filter "FullyQualifiedName~DocumentSemanticConformanceTests"`
+- `dotnet format EzClassify.sln --verify-no-changes --no-restore`
+- `dotnet build EzClassify.sln --no-restore --configuration Release`
+- `dotnet test EzClassify.sln --no-build --configuration Release --filter "Category!=Live"`
+- `dotnet test EzClassify.sln --no-build --configuration Release --filter "FullyQualifiedName~PublicApiSurfaceTests"`
+- `dotnet test EzClassify.sln --no-build --configuration Release --filter "FullyQualifiedName~DocumentSemanticConformanceTests"`
 - `python3 scripts/gen-notices.py notices --check`
 
 Before compilation CI verifies the OpenAPI and generator hashes the manifest

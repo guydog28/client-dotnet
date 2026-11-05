@@ -483,7 +483,7 @@ const output = `// Code generated from json-schemas@${schemasSha} by gen.mjs@${g
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace EzClassify;
+namespace EzClassify.Contract;
 
 ${blocks.join('\n\n')}
 `;

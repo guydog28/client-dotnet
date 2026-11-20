@@ -6,7 +6,7 @@
     <AssemblyName>EzClassify.Rest.Client</AssemblyName>
     <RootNamespace>EzClassify</RootNamespace>
     <PackageId>EzClassify.Rest.Client</PackageId>
-    <Version>1.0.0-dev.30</Version>
+    <Version>1.0.0-rc.0</Version>
     <Description>EzClassify .NET SDK. HTTP client, wire models and response parsers for the EzClassify REST API. Uses System.Net.Http and System.Text.Json; no third-party HTTP dependencies.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
